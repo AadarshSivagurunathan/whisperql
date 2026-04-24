@@ -248,10 +248,15 @@ To swap to a different LLM provider, update `LLM PROVIDER in .env`.
 
 <div align="center">
 
-** WhisperQL** · Speak softly, query loudly.
-
+WhisperQL · Speak softly, query loudly.
 Built using FastAPI · Streamlit · Google Gemini · PostgreSQL
 
+</div>
+
+---
+
+<div align="left">
+            
 Developed By Aadarsh
 
 </div>
