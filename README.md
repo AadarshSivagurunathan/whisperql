@@ -1,7 +1,9 @@
 # WhisperQL
+
 Natural Language → SQL · Powered by LLMs
 
 ### Speak softly, query loudly.
+
 > Type a plain-English question. Get SQL. Execute and See results.
 
 ![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white)
@@ -49,14 +51,14 @@ Result:     ✓ 5 rows · 2 cols · 0.43s
 
 ## Tech Stack
 
-| Layer | Technology |
-|---|---|
-| **Frontend** | Streamlit |
-| **Backend** | Python 3.10+ · FastAPI · Uvicorn |
-| **Database** | PostgreSQL · psycopg2 |
-| **LLM** | Gemini · Claude · GPT (Users choice) |
-| **Validation** | Pydantic |
-| **Testing** | pytest |
+| Layer          | Technology                           |
+| -------------- | ------------------------------------ |
+| **Frontend**   | Streamlit                            |
+| **Backend**    | Python 3.10+ · FastAPI · Uvicorn     |
+| **Database**   | PostgreSQL · psycopg2                |
+| **LLM**        | Gemini · Claude · GPT (Users choice) |
+| **Validation** | Pydantic                             |
+| **Testing**    | pytest                               |
 
 ---
 
@@ -64,16 +66,20 @@ Result:     ✓ 5 rows · 2 cols · 0.43s
 
 ```
 whisperql/
-├── app/
-│   ├── main.py          # FastAPI app — /schema, /generate, /execute, /history, /health
-│   ├── db.py            # PostgreSQL connection + schema introspection
-│   ├── llm.py           # LLM gateway (Google Gemini 2.0 Flash)
-│   └── models.py        # Pydantic request/response models
-├── streamlit_app.py     # Streamlit frontend (WhisperQL UI)
-├── tests/
-│   ├── test_db.py       # Database connection & schema tests
-│   ├── test_llm.py      # LLM prompt & response tests
-│   └── test_api.py      # FastAPI endpoint integration tests
+├── backend/
+|   ├── app/
+│   |  ├── main.py          # FastAPI app — /schema, /generate, /execute, /history, /health
+│   |  ├── db.py            # PostgreSQL connection + schema introspection
+│   |  ├── llm.py           # LLM gateway (Google Gemini 3 Flash)
+│   |  └── models.py        # Pydantic request/response models
+|   ├── tests/
+│   |  ├── test_db.py       # Database connection & schema tests
+│   |  ├── test_llm.py      # LLM prompt & response tests
+|   |  └── test_api.py      # FastAPI endpoint integration tests
+|
+├── frontend/
+|   ├── streamlit_app.py     # Streamlit frontend (WhisperQL UI)
+|
 ├── .env                 # Environment variables (never commit this)
 ├── .env.example         # Example env file for reference
 ├── requirements.txt     # Python dependencies
@@ -131,10 +137,10 @@ GOOGLE_API_KEY=your_google_ai_studio_api_key_here
 DATABASE_URL=postgresql://username:password@localhost:5432/your_database
 ```
 
-| Variable | Description | Required |
-|---|---|---|
-| `GOOGLE_API_KEY` | Your Google AI Studio API key | ✅ Yes |
-| `DATABASE_URL` | PostgreSQL connection string | ✅ Yes |
+| Variable         | Description                   | Required |
+| ---------------- | ----------------------------- | -------- |
+| `GOOGLE_API_KEY` | Your Google AI Studio API key | ✅ Yes   |
+| `DATABASE_URL`   | PostgreSQL connection string  | ✅ Yes   |
 
 > **Never commit your `.env` file.** It is already in `.gitignore`.
 
@@ -143,12 +149,13 @@ DATABASE_URL=postgresql://username:password@localhost:5432/your_database
 ### 5. Start the FastAPI backend
 
 ```bash
-uvicorn app.main:app --reload
+uvicorn backend.app.main:app --reload
 ```
 
 The API will be running at `http://localhost:8000`.
 
 Verify it's alive:
+
 ```bash
 curl http://localhost:8000/health
 # → {"status": "ok"}
@@ -163,7 +170,7 @@ Interactive API docs are available at `http://localhost:8000/docs`.
 Open a **separate terminal** (with the virtual environment activated):
 
 ```bash
-streamlit run streamlit_app.py
+streamlit run frontend/streamlit_app.py
 ```
 
 The app opens at `http://localhost:8501`.
@@ -202,7 +209,7 @@ The app opens at `http://localhost:8501`.
 
 2. **Ask a Question** — Type any plain-English question about your data in the query box.
 
-3. **Generate SQL** — WhisperQL sends your question + schema to Gemini 2.0 Flash, which returns a SQL query tailored to your exact database structure.
+3. **Generate SQL** — WhisperQL sends your question + schema to Gemini 3 Flash, which returns a SQL query tailored to your exact database structure.
 
 4. **Review** — The generated SQL is displayed with syntax highlighting. You can inspect it before running anything.
 
@@ -213,11 +220,12 @@ The app opens at `http://localhost:8501`.
 ---
 
 ### LLM Provider
-WhisperQL uses **Google Gemini 3.1 Flash** via the `google-generativeai` SDK. It is fast, free-tier friendly, and highly capable for structured output tasks like SQL generation.
+
+WhisperQL uses **Google Gemini 3 Flash** via the `google-generativeai` SDK. It is fast, free-tier friendly, and highly capable for structured output tasks like SQL generation.
 
 Get your free API key at [Google AI Studio](https://aistudio.google.com/apikey) — no credit card required.
 
-To swap to a different LLM provider, update `LLM PROVIDER in .env`. 
+To swap to a different LLM provider, update `LLM PROVIDER in .env`.
 
 ---
 
@@ -238,12 +246,12 @@ To swap to a different LLM provider, update `LLM PROVIDER in .env`.
 
 ---
 
-
 <div align="center">
 
-**◉ WhisperQL** · Speak softly, query loudly.
+** WhisperQL** · Speak softly, query loudly.
 
-Built with ♥ using FastAPI · Streamlit · Google Gemini · PostgreSQL
+Built using FastAPI · Streamlit · Google Gemini · PostgreSQL
+
+Developed By Aadarsh
 
 </div>
-

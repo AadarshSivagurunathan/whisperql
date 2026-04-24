@@ -1,0 +1,13 @@
+fastapi
+uvicorn
+psycopg2-binary
+openai
+python-dotenv
+streamlit
+requests
+pydantic
+pytest
+httpx
+anthropic
+google
+google-genai
